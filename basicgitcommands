@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Git for Beginners: A Visual Guide to Safe Commands</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Fira+Code&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+        }
+        .mono {
+            font-family: 'Fira Code', monospace;
+            background-color: #e2e8f0;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 320px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <div class="container mx-auto p-4 md:p-8">
+
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold text-[#00449E] mb-2">Your First Steps in Git</h1>
+            <p class="text-lg text-gray-600 max-w-3xl mx-auto">A visual guide to the essential "read-only" commands. Explore any project with confidence, without worrying about making changes.</p>
+        </header>
+
+        <main class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+            <div class="md:col-span-2 bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-2xl font-bold text-[#005CB9] mb-4">🚀 Getting Started: Setting Up Your Workspace</h2>
+                <p class="text-gray-600 mb-6">Every Git journey begins here. You either start a brand new version-controlled project on your machine or copy an existing one from a remote location like GitHub.</p>
+                <div class="flex flex-col md:flex-row gap-6 text-center">
+                    <div class="flex-1 border-2 border-dashed border-gray-300 rounded-lg p-6">
+                        <p class="text-5xl mb-3">📁</p>
+                        <h3 class="text-xl font-semibold">Initialize a New Repository</h3>
+                        <p class="mono text-[#00449E]">git init</p>
+                        <p class="mt-2 text-gray-500">Creates a new, empty Git repository in your current project folder.</p>
+                    </div>
+                    <div class="flex-1 border-2 border-dashed border-gray-300 rounded-lg p-6">
+                        <p class="text-5xl mb-3">📥</p>
+                        <h3 class="text-xl font-semibold">Clone an Existing Repository</h3>
+                        <p class="mono text-[#00449E]">git clone [URL]</p>
+                        <p class="mt-2 text-gray-500">Makes a complete copy of a remote repository on your local machine.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="md:col-span-2 bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-2xl font-bold text-[#005CB9] mb-4">🔍 Inspecting Your Repository: What's Going On?</h2>
+                <p class="text-gray-600 mb-6">Once you have a repository, your most common task is to check its status, view its history, and see the differences between versions. These commands are your eyes into the project's life.</p>
+                <div class="chart-container">
+                    <canvas id="commandCategoriesChart"></canvas>
+                </div>
+                <p class="text-center text-gray-500 mt-2">The majority of "safe" commands are for viewing information, making them perfect for learning.</p>
+            </div>
+
+            <div class="md:col-span-2 bg-white rounded-lg shadow-md p-6">
+                <h3 class="text-xl font-bold text-center text-[#007FFF] mb-6">A Common Inspection Workflow</h3>
+                <div class="flex flex-col md:flex-row items-center justify-center gap-4 text-center">
+                    <div class="p-4 rounded-lg bg-blue-50 border border-blue-200">
+                        <p class="font-semibold">1. Check Current State</p>
+                        <p class="mono">git status</p>
+                        <p class="text-xs text-gray-500">What files have changed?</p>
+                    </div>
+                    <div class="text-2xl text-blue-400 font-bold">→</div>
+                    <div class="p-4 rounded-lg bg-blue-50 border border-blue-200">
+                        <p class="font-semibold">2. View Project History</p>
+                        <p class="mono">git log</p>
+                        <p class="text-xs text-gray-500">What commits were made?</p>
+                    </div>
+                    <div class="text-2xl text-blue-400 font-bold">→</div>
+                    <div class="p-4 rounded-lg bg-blue-50 border border-blue-200">
+                        <p class="font-semibold">3. Examine a Specific Change</p>
+                        <p class="mono">git show [commit]</p>
+                        <p class="text-xs text-gray-500">What changed in this commit?</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-2xl font-bold text-[#005CB9] mb-4">📊 Command Usage Frequency (For Beginners)</h2>
+                <p class="text-gray-600 mb-6">As a beginner, you'll find yourself using some commands far more than others. <span class="mono">git status</span> and <span class="mono">git log</span> will quickly become your best friends.</p>
+                <div class="chart-container h-96 md:h-[450px]">
+                    <canvas id="usageFrequencyChart"></canvas>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-2xl font-bold text-[#005CB9] mb-4">🔄 Syncing & Navigating</h2>
+                <p class="text-gray-600 mb-6">Keeping your local copy up-to-date and moving between different lines of work (branches) is crucial for collaboration.</p>
+                
+                <div class="mt-6">
+                    <h3 class="text-lg font-semibold text-[#007FFF]">Fetch vs. Pull: What's the difference?</h3>
+                    <div class="grid grid-cols-2 gap-4 mt-2">
+                        <div class="border rounded-lg p-4">
+                            <p class="font-bold mono">git fetch</p>
+                            <p class="text-sm text-gray-600">Downloads new data from the remote but <span class="font-bold">does not</span> integrate it into your working files. It's a safe way to see what's new.</p>
+                        </div>
+                        <div class="border rounded-lg p-4">
+                            <p class="font-bold mono">git pull</p>
+                            <p class="text-sm text-gray-600">Downloads new data <span class="font-bold">and</span> immediately tries to merge it into your current branch. It's a fetch + merge.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-8">
+                    <h3 class="text-lg font-semibold text-[#007FFF]">Switching Branches</h3>
+                    <p class="text-gray-600">Branches are like parallel universes for your code. You can switch between them to work on different features.</p>
+                    <p class="mono mt-2 text-center bg-[#86C4FF] text-[#00449E] p-3 rounded-lg">git checkout [branch-name]</p>
+                </div>
+
+                <div class="mt-8 bg-yellow-50 border border-yellow-300 rounded-lg p-4">
+                    <h3 class="text-lg font-semibold text-yellow-800">⚠️ Reverting Local Changes</h3>
+                    <p class="text-sm text-yellow-700">These commands discard local changes that you have <span class="font-bold">not committed</span>. Use them with care, as the changes cannot be recovered.</p>
+                    <p class="mono mt-2">git restore [file]</p>
+                    <p class="mono mt-2">git reset --hard</p>
+                </div>
+            </div>
+
+            <div class="md:col-span-2 bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-2xl font-bold text-[#005CB9] mb-4">✨ Git Command Explainer (Powered by Gemini)</h2>
+                <p class="text-gray-600 mb-6">Curious about a Git command? Type it below, and our Gemini-powered explainer will tell you what it does, perfect for beginners!</p>
+                <div class="flex flex-col gap-4">
+                    <input type="text" id="gitCommandInput" placeholder="e.g., git status or git log" class="p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#007FFF]">
+                    <button id="explainCommandBtn" class="bg-[#007FFF] hover:bg-[#005CB9] text-white font-bold py-3 px-6 rounded-lg transition duration-300 ease-in-out shadow-md hover:shadow-lg">✨ Explain Command</button>
+                </div>
+                <div id="explanationOutput" class="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-lg text-gray-700 min-h-[100px] flex items-center justify-center text-center">
+                    <p class="text-gray-500">Your explanation will appear here.</p>
+                </div>
+            </div>
+
+        </main>
+
+        <footer class="text-center mt-12 py-6 border-t">
+            <p class="text-gray-500">Infographic created with Tailwind CSS and Chart.js. No SVG or Mermaid JS was used in this output.</p>
+        </footer>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            
+            const brilliantBlues = {
+                deep: '#00449E',
+                primary: '#005CB9',
+                bright: '#007FFF',
+                light: '#41A0FF',
+                pale: '#86C4FF',
+                text: '#334155'
+            };
+
+            function wrapLabel(label, maxWidth = 16) {
+                if (label.length <= maxWidth) {
+                    return label;
+                }
+                const words = label.split(' ');
+                let lines = [];
+                let currentLine = '';
+                for (const word of words) {
+                    if ((currentLine + ' ' + word).trim().length > maxWidth) {
+                        lines.push(currentLine.trim());
+                        currentLine = word;
+                    } else {
+                        currentLine = (currentLine + ' ' + word).trim();
+                    }
+                }
+                if (currentLine) {
+                    lines.push(currentLine.trim());
+                }
+                return lines;
+            }
+
+            const tooltipTitleCallback = {
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            title: function(tooltipItems) {
+                                const item = tooltipItems[0];
+                                let label = item.chart.data.labels[item.dataIndex];
+                                if (Array.isArray(label)) {
+                                  return label.join(' ');
+                                } else {
+                                  return label;
+                                }
+                            }
+                        }
+                    }
+                }
+            };
+
+            const commandCategoriesCtx = document.getElementById('commandCategoriesChart').getContext('2d');
+            new Chart(commandCategoriesCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Viewing Information', 'Getting & Updating Code', 'Getting Started'],
+                    datasets: [{
+                        label: 'Commands by Category',
+                        data: [9, 5, 2],
+                        backgroundColor: [
+                            brilliantBlues.bright,
+                            brilliantBlues.light,
+                            brilliantBlues.pale,
+                        ],
+                        borderColor: '#ffffff',
+                        borderWidth: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                        },
+                        title: {
+                            display: true,
+                            text: 'Breakdown of "Safe" Git Commands',
+                            font: { size: 18, weight: '600' },
+                            color: brilliantBlues.deep,
+                            padding: { bottom: 20 }
+                        },
+                        ...tooltipTitleCallback.plugins
+                    }
+                }
+            });
+
+            const usageFrequencyCtx = document.getElementById('usageFrequencyChart').getContext('2d');
+            new Chart(usageFrequencyCtx, {
+                type: 'bar',
+                data: {
+                    labels: [
+                        'git status', 
+                        'git log', 
+                        'git branch', 
+                        'git pull', 
+                        'git checkout [branch]', 
+                        'git diff',
+                        'git fetch'
+                    ].map(label => wrapLabel(label)),
+                    datasets: [{
+                        label: 'Conceptual Usage Frequency',
+                        data: [95, 85, 80, 75, 70, 60, 50],
+                        backgroundColor: [
+                            brilliantBlues.bright,
+                            brilliantBlues.light,
+                            brilliantBlues.pale,
+                            brilliantBlues.bright,
+                            brilliantBlues.light,
+                            brilliantBlues.pale,
+                            brilliantBlues.bright
+                        ],
+                        borderRadius: 4,
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            grid: { display: false },
+                            ticks: { display: false }
+                        },
+                        y: {
+                            grid: { display: false },
+                            ticks: { color: brilliantBlues.text, font: { size: 14 } }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        ...tooltipTitleCallback.plugins
+                    }
+                }
+            });
+
+            const gitCommandInput = document.getElementById('gitCommandInput');
+            const explainCommandBtn = document.getElementById('explainCommandBtn');
+            const explanationOutput = document.getElementById('explanationOutput');
+
+            explainCommandBtn.addEventListener('click', async () => {
+                const command = gitCommandInput.value.trim();
+                if (!command) {
+                    explanationOutput.innerHTML = '<p class="text-red-500">Please enter a Git command.</p>';
+                    return;
+                }
+
+                explanationOutput.innerHTML = '<p class="text-gray-500 animate-pulse">Loading explanation...</p>';
+
+                let chatHistory = [];
+                const prompt = `Explain the Git command '${command}' for a beginner. Clearly state its purpose and whether it is generally considered a 'safe' (read-only) command or one that can make 'destructive' changes to the repository history or working directory. Keep the explanation concise and easy to understand.`;
+                chatHistory.push({ role: "user", parts: [{ text: prompt }] });
+                const payload = { contents: chatHistory };
+                const apiKey = "";
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+
+                let retryCount = 0;
+                const maxRetries = 5;
+                const baseDelay = 1000;
+
+                const fetchWithRetry = async () => {
+                    try {
+                        const response = await fetch(apiUrl, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(payload)
+                        });
+
+                        if (!response.ok) {
+                            if (response.status === 429 && retryCount < maxRetries) {
+                                const delay = baseDelay * Math.pow(2, retryCount);
+                                retryCount++;
+                                await new Promise(resolve => setTimeout(resolve, delay));
+                                return fetchWithRetry();
+                            }
+                            throw new Error(`HTTP error! status: ${response.status}`);
+                        }
+
+                        const result = await response.json();
+                        if (result.candidates && result.candidates.length > 0 &&
+                            result.candidates[0].content && result.candidates[0].content.parts &&
+                            result.candidates[0].content.parts.length > 0) {
+                            const text = result.candidates[0].content.parts[0].text;
+                            explanationOutput.innerHTML = `<p>${text}</p>`;
+                        } else {
+                            explanationOutput.innerHTML = '<p class="text-red-500">Could not get a valid explanation. Please try again.</p>';
+                        }
+                    } catch (error) {
+                        console.error('Error fetching explanation:', error);
+                        explanationOutput.innerHTML = `<p class="text-red-500">An error occurred: ${error.message}. Please try again later.</p>`;
+                    }
+                };
+
+                fetchWithRetry();
+            });
+        });
+    </script>
+
+</body>
+</html>
