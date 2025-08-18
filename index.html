@@ -68,15 +68,6 @@
             </div>
 
             <div class="md:col-span-2 bg-white rounded-lg shadow-md p-6">
-                <h2 class="text-2xl font-bold text-[#005CB9] mb-4">🔍 Inspecting Your Repository: What's Going On?</h2>
-                <p class="text-gray-600 mb-6">Once you have a repository, your most common task is to check its status, view its history, and see the differences between versions. These commands are your eyes into the project's life.</p>
-                <div class="chart-container">
-                    <canvas id="commandCategoriesChart"></canvas>
-                </div>
-                <p class="text-center text-gray-500 mt-2">The majority of "safe" commands are for viewing information, making them perfect for learning.</p>
-            </div>
-
-            <div class="md:col-span-2 bg-white rounded-lg shadow-md p-6">
                 <h3 class="text-xl font-bold text-center text-[#007FFF] mb-6">A Common Inspection Workflow</h3>
                 <div class="flex flex-col md:flex-row items-center justify-center gap-4 text-center">
                     <div class="p-4 rounded-lg bg-blue-50 border border-blue-200">
@@ -209,42 +200,6 @@
                     }
                 }
             };
-
-            const commandCategoriesCtx = document.getElementById('commandCategoriesChart').getContext('2d');
-            new Chart(commandCategoriesCtx, {
-                type: 'doughnut',
-                data: {
-                    labels: ['Viewing Information', 'Getting & Updating Code', 'Getting Started'],
-                    datasets: [{
-                        label: 'Commands by Category',
-                        data: [9, 5, 2],
-                        backgroundColor: [
-                            brilliantBlues.bright,
-                            brilliantBlues.light,
-                            brilliantBlues.pale,
-                        ],
-                        borderColor: '#ffffff',
-                        borderWidth: 4
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            position: 'bottom',
-                        },
-                        title: {
-                            display: true,
-                            text: 'Breakdown of "Safe" Git Commands',
-                            font: { size: 18, weight: '600' },
-                            color: brilliantBlues.deep,
-                            padding: { bottom: 20 }
-                        },
-                        ...tooltipTitleCallback.plugins
-                    }
-                }
-            });
 
             const usageFrequencyCtx = document.getElementById('usageFrequencyChart').getContext('2d');
             new Chart(usageFrequencyCtx, {
