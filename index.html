@@ -3,318 +3,1576 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Git for Beginners: A Visual Guide to Safe Commands</title>
+    <title>My Journey and Team Overview - Executive Introduction</title>
+    <!-- Load Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Fira+Code&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary-color: #4f46e5;
+            --secondary-color: #1e40af;
+            --accent-color: #06b6d4;
+            --success-color: #10b981;
+            --text-color: #1f2937;
+            --bg-color: #f9fafb;
+            --gold-color: #fbbf24;
+        }
+        
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f8fafc;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: var(--text-color);
+            min-height: 100vh;
         }
-        .mono {
-            font-family: 'Fira Code', monospace;
-            background-color: #e2e8f0;
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-size: 0.9em;
+        
+        .main-container {
+            background: white;
+            animation: fadeInUp 0.8s ease-out;
         }
-        .chart-container {
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes pulse-slow {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        @keyframes shine {
+            0% { background-position: -200% center; }
+            100% { background-position: 200% center; }
+        }
+        
+        .executive-card {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
-            width: 100%;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-            height: 320px;
-            max-height: 400px;
+            overflow: hidden;
         }
-        @media (min-width: 768px) {
-            .chart-container {
-                height: 400px;
+        
+        .executive-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+        
+        .executive-card:hover::before {
+            left: 100%;
+        }
+        
+        .executive-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+        
+        .phase-card {
+            min-height: 350px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            cursor: pointer;
+        }
+        
+        .phase-card.active {
+            background: linear-gradient(135deg, #e0e7ff 0%, #ddd6fe 100%);
+            border-width: 2px;
+        }
+        
+        .details-container {
+            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease;
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+        }
+        
+        .details-container.show {
+            max-height: 600px;
+            opacity: 1;
+        }
+        
+        .nav-button {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border-radius: 0.5rem;
+            position: relative;
+        }
+        
+        .nav-button:not(.active):hover {
+            background: linear-gradient(135deg, #e0e7ff 0%, #ddd6fe 100%);
+            transform: translateY(-2px);
+        }
+        
+        .nav-button.active {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            font-weight: 600;
+            box-shadow: 0 10px 15px -3px rgba(79, 70, 229, 0.4);
+            transform: translateY(-2px);
+        }
+        
+        .gold-medal {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 25px rgba(251, 191, 36, 0.5);
+            animation: pulse-slow 3s ease-in-out infinite;
+            font-size: 32px;
+        }
+        
+        .flag-icon {
+            font-size: 24px;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+        }
+        
+        .metric-card {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            border-left: 4px solid var(--accent-color);
+            transition: all 0.3s ease;
+        }
+        
+        .metric-card:hover {
+            transform: translateX(5px);
+            box-shadow: 0 10px 20px rgba(6, 182, 212, 0.2);
+        }
+        
+        .progress-ring {
+            transform: rotate(-90deg);
+        }
+        
+        .progress-ring-circle {
+            transition: stroke-dashoffset 0.5s ease;
+        }
+        
+        .skill-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+            color: white;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin: 0.25rem;
+            box-shadow: 0 4px 6px rgba(79, 70, 229, 0.3);
+            transition: all 0.2s;
+        }
+        
+        .skill-badge:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(79, 70, 229, 0.4);
+        }
+        
+        .company-logo {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+        
+        .company-logo:hover {
+            transform: rotate(5deg) scale(1.1);
+        }
+        
+        .impact-number {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 900;
+        }
+        
+        .page-content {
+            min-height: 500px;
+        }
+        
+        .shine-effect {
+            background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.8) 50%, transparent 100%);
+            background-size: 200% auto;
+            animation: shine 3s linear infinite;
+        }
+        
+        @media (max-width: 768px) {
+            .gold-medal {
+                width: 50px;
+                height: 50px;
+                font-size: 24px;
             }
         }
     </style>
 </head>
-<body class="text-gray-800">
-
-    <div class="container mx-auto p-4 md:p-8">
-
-        <header class="text-center mb-12">
-            <h1 class="text-4xl md:text-5xl font-bold text-[#00449E] mb-2">Your First Steps in Git</h1>
-            <p class="text-lg text-gray-600 max-w-3xl mx-auto">A visual guide to the essential "read-only" commands. Explore any project with confidence, without worrying about making changes.</p>
+<body class="p-4 sm:p-8">
+    <div class="max-w-7xl mx-auto main-container p-6 sm:p-10 rounded-3xl shadow-2xl">
+        
+        <!-- Header & Title -->
+        <header class="text-center mb-8 relative">
+            <div class="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
+                <div class="text-9xl">🚀</div>
+            </div>
+            <h1 class="text-4xl sm:text-6xl font-extrabold text-gray-900 leading-tight relative">
+                <span class="bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
+                    My Journey and Team Overview
+                </span>
+            </h1>
+            <p class="text-xl sm:text-2xl mt-3 text-gray-600 font-medium relative">
+                <span class="inline-block">💼</span> Driving Transformation & Business Value
+            </p>
+            <div class="mt-4 flex justify-center gap-3 flex-wrap">
+                <span class="skill-badge">🏆 Director, Engineering</span>
+                <span class="skill-badge">📊 Product Leadership</span>
+                <span class="skill-badge">🤖 AI/ML Pioneer</span>
+                <span class="skill-badge">🌍 Global Experience</span>
+            </div>
         </header>
 
-        <main class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- Navigation -->
+        <nav class="flex justify-center space-x-2 sm:space-x-3 mb-10 border-b-2 border-indigo-100 pb-4 flex-wrap gap-2">
+            <button id="nav-journey" onclick="showPage('journey')" class="nav-button active py-2 px-3 text-sm sm:text-base text-indigo-700">
+                🚀 My Journey
+            </button>
+            <button id="nav-value" onclick="showPage('value')" class="nav-button py-2 px-3 text-sm sm:text-base text-indigo-700">
+                💎 Business Value
+            </button>
+            <button id="nav-products" onclick="showPage('products')" class="nav-button py-2 px-3 text-sm sm:text-base text-indigo-700">
+                🎯 Key Products
+            </button>
+            <button id="nav-leadership" onclick="showPage('leadership')" class="nav-button py-2 px-3 text-sm sm:text-base text-indigo-700">
+                👨‍💼 Leadership
+            </button>
+            <button id="nav-innovations" onclick="showPage('innovations')" class="nav-button py-2 px-3 text-sm sm:text-base text-indigo-700">
+                💡 Innovations
+            </button>
+            <button id="nav-appreciations" onclick="showPage('appreciations')" class="nav-button py-2 px-3 text-sm sm:text-base text-indigo-700">
+                🏆 Appreciations
+            </button>
+            <button id="nav-bonding" onclick="showPage('bonding')" class="nav-button py-2 px-3 text-sm sm:text-base text-indigo-700">
+                🤝 Team Bonding
+            </button>
+        </nav>
 
-            <div class="md:col-span-2 bg-white rounded-lg shadow-md p-6">
-                <h2 class="text-2xl font-bold text-[#005CB9] mb-4">🚀 Getting Started: Setting Up Your Workspace</h2>
-                <p class="text-gray-600 mb-6">Every Git journey begins here. You either start a brand new version-controlled project on your machine or copy an existing one from a remote location like GitHub.</p>
-                <div class="flex flex-col md:flex-row gap-6 text-center">
-                    <div class="flex-1 border-2 border-dashed border-gray-300 rounded-lg p-6">
-                        <p class="text-5xl mb-3">📁</p>
-                        <h3 class="text-xl font-semibold">Initialize a New Repository</h3>
-                        <p class="mono text-[#00449E]">git init</p>
-                        <p class="mt-2 text-gray-500">Creates a new, empty Git repository in your current project folder.</p>
+        <!-- Main Content Container (Pages) -->
+        <div id="page-container" class="page-content">
+
+            <!-- PAGE 1: Professional Journey & Expertise - Phased View (Updated with Toggles) -->
+            <section id="page-journey" class="page">
+                <h2 class="text-3xl font-bold text-gray-900 mb-8 border-b-2 border-indigo-200 pb-2">
+                    My Journey: Career Chapter Map
+                </h2>
+
+                <!-- Education Section - Two Tiles -->
+                <div class="mb-10 grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    
+                    <!-- Engineering Education Tile -->
+                    <div class="p-6 bg-gradient-to-br from-blue-50 via-indigo-50 to-blue-100 rounded-2xl shadow-xl border-2 border-blue-400 relative overflow-hidden">
+                        <div class="absolute top-0 right-0 text-9xl opacity-5 pointer-events-none">⚙️</div>
+                        <div class="flex items-start gap-4">
+                            <!-- Engineering Icon -->
+                            <div class="flex-shrink-0">
+                                <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-full flex items-center justify-center shadow-lg">
+                                    <span class="text-4xl">📡</span>
+                                </div>
+                            </div>
+                            <div class="flex-grow">
+                                <h3 class="text-xl font-bold text-blue-900 mb-3 flex items-center">
+                                    Engineering Foundation
+                                    <span class="ml-2 text-xs bg-blue-600 text-white px-2 py-1 rounded-full">Technical</span>
+                                </h3>
+                                <div class="text-gray-700">
+                                    <p class="font-bold text-base text-gray-900 mb-1">🎓 Bachelor of Engineering (B.E.)</p>
+                                    <p class="text-sm">✨ Electronics and Communication Engineering</p>
+                                    <p class="text-xs text-gray-600 mt-2 flex items-center gap-1">
+                                        <span>🏛️</span> Osmania University, Hyderabad, India <span class="flag-icon text-base">🇮🇳</span>
+                                    </p>
+                                </div>
+                                <div class="mt-4 flex items-center gap-2 flex-wrap">
+                                    <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full font-semibold">📡 Communication</span>
+                                    <span class="text-xs bg-indigo-100 text-indigo-800 px-2 py-1 rounded-full font-semibold">⚡ Electronics</span>
+                                    <span class="text-xs bg-purple-100 text-purple-800 px-2 py-1 rounded-full font-semibold">🔧 Systems Design</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="flex-1 border-2 border-dashed border-gray-300 rounded-lg p-6">
-                        <p class="text-5xl mb-3">📥</p>
-                        <h3 class="text-xl font-semibold">Clone an Existing Repository</h3>
-                        <p class="mono text-[#00449E]">git clone [URL]</p>
-                        <p class="mt-2 text-gray-500">Makes a complete copy of a remote repository on your local machine.</p>
+                    
+                    <!-- MBA Education Tile -->
+                    <div class="p-6 bg-gradient-to-br from-yellow-50 via-amber-50 to-yellow-100 rounded-2xl shadow-xl border-2 border-yellow-400 relative overflow-hidden">
+                        <div class="absolute top-0 right-0 text-9xl opacity-5 pointer-events-none">🎓</div>
+                        <div class="flex items-start gap-4">
+                            <!-- Animated Gold Medal -->
+                            <div class="gold-medal flex-shrink-0">
+                                🥇
+                            </div>
+                            <div class="flex-grow">
+                                <h3 class="text-xl font-bold text-yellow-800 mb-3 flex items-center">
+                                    Business Leadership
+                                    <span class="ml-2 text-xs bg-yellow-600 text-white px-2 py-1 rounded-full">Gold Medalist</span>
+                                </h3>
+                                <div class="text-gray-700">
+                                    <p class="font-bold text-base text-gray-900 mb-1">📚 Masters of Business Administration (MBA)</p>
+                                    <p class="text-sm">✨ Specialization: Marketing & IT Operations</p>
+                                    <p class="text-xs text-gray-500 mt-2">📅 Year: 2010 - 2011</p>
+                                </div>
+                                <div class="mt-4 flex items-center gap-2">
+                                    <span class="text-3xl">🏆</span>
+                                    <div>
+                                        <p class="font-extrabold text-xl text-yellow-700">Gold Medal</p>
+                                        <p class="text-xs text-yellow-600">Top Academic Achievement</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                    
                 </div>
-            </div>
 
-            <div class="md:col-span-2 bg-white rounded-lg shadow-md p-6">
-                <h3 class="text-xl font-bold text-center text-[#007FFF] mb-6">A Common Inspection Workflow</h3>
-                <div class="flex flex-col md:flex-row items-center justify-center gap-4 text-center">
-                    <div class="p-4 rounded-lg bg-blue-50 border border-blue-200">
-                        <p class="font-semibold">1. Check Current State</p>
-                        <p class="mono">git status</p>
-                        <p class="text-xs text-gray-500">What files have changed?</p>
+                <!-- Professional Phases Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    
+                    <!-- Phase 1: TCS (Foundation & Operations) -->
+                    <div class="executive-card phase-card bg-gradient-to-br from-blue-50 to-indigo-50 p-6 rounded-2xl border-t-4 border-indigo-600 cursor-pointer hover:shadow-2xl" id="card-tcs" onclick="toggleDetails('tcs', this)">
+                        <div class="flex flex-col h-full">
+                            
+                            <!-- Header & Location -->
+                            <div class="flex items-start justify-between mb-4">
+                                <div class="flex items-center gap-3">
+                                    <div class="company-logo bg-gradient-to-br from-blue-600 to-indigo-700 flex items-center justify-center text-white font-bold text-xl">
+                                        TCS
+                                    </div>
+                                    <div>
+                                        <h3 class="text-2xl font-extrabold text-indigo-900 leading-none">TCS</h3>
+                                        <p class="text-xs text-gray-500 mt-1">Tata Consultancy Services</p>
+                                    </div>
+                                </div>
+                                <div class="flex flex-col items-end">
+                                    <span class="flag-icon">🇮🇳</span>
+                                    <span class="text-xs font-bold text-indigo-700 mt-1">INDIA</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Main Visible Content -->
+                            <div class="bg-white bg-opacity-60 rounded-lg p-3 mb-3">
+                                <p class="text-xs font-bold uppercase text-indigo-700 mb-2 flex items-center gap-2">
+                                    📅 2005 - 2011 <span class="bg-indigo-600 text-white px-2 py-0.5 rounded-full text-xs">6 Years</span>
+                                </p>
+                                <p class="text-sm font-bold text-indigo-900 mb-1">Head - Operations</p>
+                                <p class="text-gray-700 text-sm mb-2">
+                                    Core foundation in IT and Operations strategy
+                                </p>
+                                <div class="flex items-center gap-2">
+                                    <span class="text-2xl">💰</span>
+                                    <span class="impact-number text-2xl font-extrabold">$40M</span>
+                                    <span class="text-xs text-gray-600">Account Value</span>
+                                </div>
+                            </div>
+
+                            <!-- Toggle Indicator -->
+                            <div class="mt-auto text-indigo-600 flex justify-between items-center pt-3 border-t-2 border-indigo-200">
+                                <span class="text-sm font-semibold flex items-center gap-2">
+                                    <span class="text-lg">🔍</span> Click for Details
+                                </span>
+                                <svg id="arrow-tcs" class="w-6 h-6 transition-transform duration-300 transform rotate-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </div>
+                            
+                            <!-- Collapsible Details Container -->
+                            <div id="details-tcs" class="mt-4 border-t-2 border-indigo-300 pt-4 details-container">
+                                <ul class="text-sm text-gray-700 space-y-2">
+                                    <li class="flex items-start gap-2">
+                                        <span class="text-indigo-600 font-bold">📊</span>
+                                        <span>P&L Management & Process Optimization</span>
+                                    </li>
+                                    <li class="flex items-start gap-2">
+                                        <span class="text-indigo-600 font-bold">💡</span>
+                                        <span>Responsible for strategies for operating margins</span>
+                                    </li>
+                                    <li class="flex items-start gap-2">
+                                        <span class="text-indigo-600 font-bold">🚀</span>
+                                        <span>First exposure to CRM Systems (Siebel/Salesforce)</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
-                    <div class="text-2xl text-blue-400 font-bold">→</div>
-                    <div class="p-4 rounded-lg bg-blue-50 border border-blue-200">
-                        <p class="font-semibold">2. View Project History</p>
-                        <p class="mono">git log</p>
-                        <p class="text-xs text-gray-500">What commits were made?</p>
+
+                    <!-- Phase 2: Qualcomm (Global Transformation & Expertise) -->
+                    <div class="executive-card phase-card bg-gradient-to-br from-red-50 to-orange-50 p-6 rounded-2xl border-t-4 border-red-600 cursor-pointer hover:shadow-2xl" id="card-qualcomm" onclick="toggleDetails('qualcomm', this)">
+                        <div class="flex flex-col h-full">
+                            
+                            <!-- Header & Location -->
+                            <div class="flex items-start justify-between mb-4">
+                                <div class="flex items-center gap-3">
+                                    <div class="company-logo bg-gradient-to-br from-red-600 to-orange-600 flex items-center justify-center text-white font-bold text-lg">
+                                        Q
+                                    </div>
+                                    <div>
+                                        <h3 class="text-2xl font-extrabold text-red-900 leading-none">Qualcomm</h3>
+                                        <p class="text-xs text-gray-500 mt-1">Global Technology Leader</p>
+                                    </div>
+                                </div>
+                                <div class="flex flex-col items-end">
+                                    <span class="flag-icon">🇺🇸</span>
+                                    <span class="text-xs font-bold text-red-700 mt-1">USA (HQ)</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Main Visible Content -->
+                            <div class="bg-white bg-opacity-70 rounded-lg p-3 mb-3">
+                                <p class="text-xs font-bold uppercase text-red-700 mb-2 flex items-center gap-2">
+                                    📅 2014 - 2017 <span class="bg-red-600 text-white px-2 py-0.5 rounded-full text-xs">3 Years</span>
+                                </p>
+                                <p class="text-sm font-bold text-red-900 mb-1">Program Manager</p>
+                                <p class="text-gray-700 text-sm mb-2">
+                                    Led Large Salesforce Transformations for Qualcomm Life
+                                </p>
+                                <div class="flex items-center gap-2 flex-wrap">
+                                    <span class="text-xl">🏥</span>
+                                    <span class="text-xs text-gray-600">Patients • Doctors • Caregivers</span>
+                                </div>
+                            </div>
+
+                            <!-- Toggle Indicator -->
+                            <div class="mt-auto text-red-600 flex justify-between items-center pt-3 border-t-2 border-red-200">
+                                <span class="text-sm font-semibold flex items-center gap-2">
+                                    <span class="text-lg">🔍</span> Click for Details
+                                </span>
+                                <svg id="arrow-qualcomm" class="w-6 h-6 transition-transform duration-300 transform rotate-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </div>
+
+                            <!-- Collapsible Details Container -->
+                            <div id="details-qualcomm" class="mt-4 border-t-2 border-red-300 pt-4 details-container">
+                                <ul class="text-sm text-gray-700 space-y-2">
+                                    <li class="flex items-start gap-2">
+                                        <span class="text-red-600 font-bold">🌍</span>
+                                        <span>Global Program Leadership (San Diego HQ)</span>
+                                    </li>
+                                    <li class="flex items-start gap-2">
+                                        <span class="text-red-600 font-bold">☁️</span>
+                                        <span>In-depth expertise: Sales Cloud, Service Cloud, Force.com, and Tableau</span>
+                                    </li>
+                                    <li class="flex items-start gap-2">
+                                        <span class="text-red-600 font-bold">👨‍💼</span>
+                                        <span>Salesforce Lead Business Analyst and Program Manager</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
-                    <div class="text-2xl text-blue-400 font-bold">→</div>
-                    <div class="p-4 rounded-lg bg-blue-50 border border-blue-200">
-                        <p class="font-semibold">3. Examine a Specific Change</p>
-                        <p class="mono">git show [commit]</p>
-                        <p class="text-xs text-gray-500">What changed in this commit?</p>
+
+                    <!-- Phase 3: Salesforce (Director Leadership & Domain Ownership) -->
+                    <div class="executive-card phase-card bg-gradient-to-br from-cyan-50 to-blue-50 p-6 rounded-2xl border-t-4 border-cyan-600 cursor-pointer hover:shadow-2xl" id="card-sfdc" onclick="toggleDetails('sfdc', this)">
+                        <div class="flex flex-col h-full">
+                            
+                            <!-- Header & Location -->
+                            <div class="flex items-start justify-between mb-4">
+                                <div class="flex items-center gap-3">
+                                    <div class="company-logo bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-white font-bold text-sm">
+                                        ☁️
+                                    </div>
+                                    <div>
+                                        <h3 class="text-2xl font-extrabold text-cyan-900 leading-none">Salesforce</h3>
+                                        <p class="text-xs text-gray-500 mt-1">Business Technology</p>
+                                    </div>
+                                </div>
+                                <div class="flex flex-col items-end">
+                                    <span class="flag-icon">🇮🇳</span>
+                                    <span class="text-xs font-bold text-cyan-700 mt-1">INDIA</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Main Visible Content -->
+                            <div class="bg-white bg-opacity-70 rounded-lg p-3 mb-3">
+                                <p class="text-xs font-bold uppercase text-cyan-700 mb-2 flex items-center gap-2">
+                                    📅 2017 - Present <span class="bg-green-600 text-white px-2 py-0.5 rounded-full text-xs animate-pulse">Current</span>
+                                </p>
+                                <p class="text-sm font-bold text-cyan-900 mb-1">Director, Engineering</p>
+                                <p class="text-gray-700 text-sm mb-2">
+                                    Pioneering AI/ML & Leading Engineering Excellence
+                                </p>
+                                <div class="flex items-center gap-2 flex-wrap mt-2">
+                                    <span class="text-xs bg-cyan-100 text-cyan-800 px-2 py-1 rounded-full font-semibold">🤖 AI/ML</span>
+                                    <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full font-semibold">📊 M&A</span>
+                                    <span class="text-xs bg-indigo-100 text-indigo-800 px-2 py-1 rounded-full font-semibold">💼 Q2C</span>
+                                </div>
+                            </div>
+
+                            <!-- Toggle Indicator -->
+                            <div class="mt-auto text-cyan-600 flex justify-between items-center pt-3 border-t-2 border-cyan-200">
+                                <span class="text-sm font-semibold flex items-center gap-2">
+                                    <span class="text-lg">🔍</span> Click for Career Path
+                                </span>
+                                <svg id="arrow-sfdc" class="w-6 h-6 transition-transform duration-300 transform rotate-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </div>
+                            
+                            <!-- Collapsible Details Container -->
+                            <div id="details-sfdc" class="mt-4 border-t-2 border-cyan-300 pt-4 details-container">
+                                <p class="text-cyan-800 font-bold mb-3 text-sm flex items-center gap-2">
+                                    <span>🎯</span> Career Progression (2017 - Present):
+                                </p>
+                                <ul class="text-sm text-gray-700 space-y-2">
+                                    <li class="flex items-start gap-2 bg-green-50 p-2 rounded-lg border-l-4 border-green-500">
+                                        <span class="text-green-600 font-bold">⭐</span>
+                                        <span><strong>Director Engineering, Partner</strong> (Current)</span>
+                                    </li>
+                                    <li class="flex items-start gap-2 bg-blue-50 p-2 rounded-lg">
+                                        <span class="text-blue-600 font-bold">📈</span>
+                                        <span>Director Product, Partner</span>
+                                    </li>
+                                    <li class="flex items-start gap-2">
+                                        <span class="text-cyan-600 font-bold">🔗</span>
+                                        <span>Senior Manager, Product - M&A Integrations</span>
+                                    </li>
+                                    <li class="flex items-start gap-2">
+                                        <span class="text-cyan-600 font-bold">💰</span>
+                                        <span>Senior Manager Product, Quote to Cash (Q2C)</span>
+                                    </li>
+                                    <li class="flex items-start gap-2">
+                                        <span class="text-cyan-600 font-bold">📊</span>
+                                        <span>Manager, Product Management - Quote to Cash</span>
+                                    </li>
+                                    <li class="flex items-start gap-2">
+                                        <span class="text-cyan-600 font-bold">🚀</span>
+                                        <span>Product Manager - Order to Cash (O2C)</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
+
                 </div>
-            </div>
+            </section>
+            
+            <!-- PAGE 2: Business Value Delivered - Key Metrics -->
+            <section id="page-value" class="page hidden">
+                <h2 class="text-3xl font-bold text-gray-900 mb-6 border-b-2 border-indigo-200 pb-2 flex items-center gap-3">
+                    <span class="text-4xl">💎</span> Major Business Value Delivered: Impact & Scale
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    
+                    <!-- Card 1: India/EMEA Reseller -->
+                    <div class="executive-card bg-gradient-to-br from-green-50 to-emerald-50 p-6 rounded-2xl border-2 border-green-300 hover:border-green-500">
+                        <div class="flex items-center space-x-3 mb-4">
+                            <div class="text-5xl">🌍</div>
+                            <h3 class="text-xl font-bold text-gray-900">Global Billing Entity</h3>
+                        </div>
+                        <div class="mb-4">
+                            <p class="text-sm text-gray-700 mb-2">Expansion across regions:</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="text-xl">🇮🇳</span>
+                                <span class="text-xl">🇬🇧</span>
+                                <span class="text-xl">🇮🇪</span>
+                                <span class="text-xl">🇪🇸</span>
+                                <span class="text-xl">🇮🇹</span>
+                                <span class="text-xl">🇩🇪</span>
+                            </div>
+                        </div>
+                        <div class="metric-card p-4 rounded-xl mb-3">
+                            <p class="impact-number text-4xl font-black">>$1Bn+</p>
+                            <p class="text-sm text-cyan-700 font-semibold">AOV Enabled in <span class="highlight bg-green-600">24 months</span></p>
+                        </div>
+                        <div class="bg-green-100 p-3 rounded-lg">
+                            <p class="text-sm text-green-800 font-semibold flex items-center gap-2">
+                                <span>📈</span> India: Fastest Growing at <strong class="text-green-600">40%+</strong>
+                            </p>
+                        </div>
+                    </div>
 
-            <div class="bg-white rounded-lg shadow-md p-6">
-                <h2 class="text-2xl font-bold text-[#005CB9] mb-4">📊 Command Usage Frequency (For Beginners)</h2>
-                <p class="text-gray-600 mb-6">As a beginner, you'll find yourself using some commands far more than others. <span class="mono">git status</span> and <span class="mono">git log</span> will quickly become your best friends.</p>
-                <div class="chart-container h-96 md:h-[450px]">
-                    <canvas id="usageFrequencyChart"></canvas>
+                    <!-- Card 2: M&A Integrations -->
+                    <div class="executive-card bg-gradient-to-br from-purple-50 to-pink-50 p-6 rounded-2xl border-2 border-purple-300 hover:border-purple-500">
+                        <div class="flex items-center space-x-3 mb-4">
+                            <div class="text-5xl">🔗</div>
+                            <h3 class="text-xl font-bold text-gray-900">M&A Integration</h3>
+                        </div>
+                        <p class="text-sm text-gray-700 mb-4">Lead Product for complex integrations</p>
+                        <div class="space-y-3">
+                            <div class="metric-card p-3 rounded-xl border-l-4 border-purple-600">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-sm font-semibold text-gray-800">🛠️ Mulesoft</span>
+                                    <span class="bg-purple-600 text-white px-3 py-1 rounded-full text-sm font-bold">18 months</span>
+                                </div>
+                            </div>
+                            <div class="metric-card p-3 rounded-xl border-l-4 border-pink-600">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-sm font-semibold text-gray-800">📊 Tableau</span>
+                                    <span class="bg-pink-600 text-white px-3 py-1 rounded-full text-sm font-bold">12 months</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-4 bg-purple-100 p-3 rounded-lg">
+                            <p class="text-sm text-purple-800 font-semibold flex items-center gap-2">
+                                <span>⚡</span> Set internal benchmarks for rapid integration
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- Card 3: Channel/Partner Impact -->
+                    <div class="executive-card bg-gradient-to-br from-blue-50 to-indigo-50 p-6 rounded-2xl border-2 border-blue-300 hover:border-blue-500">
+                        <div class="flex items-center space-x-3 mb-4">
+                            <div class="text-5xl">🤝</div>
+                            <h3 class="text-xl font-bold text-gray-900">Partner Growth</h3>
+                        </div>
+                        <p class="text-sm text-gray-700 mb-4">Driving revenue through partner platforms</p>
+                        <div class="space-y-3">
+                            <div class="metric-card p-3 rounded-xl flex justify-between items-center">
+                                <span class="text-sm font-semibold flex items-center gap-2">
+                                    <span>☁️</span> AWS Marketplace
+                                </span>
+                                <span class="impact-number text-xl font-black">>$1Bn</span>
+                            </div>
+                            <div class="metric-card p-3 rounded-xl flex justify-between items-center">
+                                <span class="text-sm font-semibold flex items-center gap-2">
+                                    <span>📦</span> Channel Order App
+                                </span>
+                                <span class="impact-number text-xl font-black">~$1Bn</span>
+                            </div>
+                            <div class="metric-card p-3 rounded-xl flex justify-between items-center">
+                                <span class="text-sm font-semibold flex items-center gap-2">
+                                    <span>⚡</span> PRM
+                                </span>
+                                <span class="bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-bold">30% Faster</span>
+                            </div>
+                        </div>
+                        <div class="mt-4 bg-blue-100 p-3 rounded-lg">
+                            <p class="text-sm text-blue-800 font-semibold flex items-center gap-2">
+                                <span>🏆</span> First PRM Implementation
+                            </p>
+                        </div>
+                    </div>
+
                 </div>
-            </div>
+            </section>
 
-            <div class="bg-white rounded-lg shadow-md p-6">
-                <h2 class="text-2xl font-bold text-[#005CB9] mb-4">🔄 Syncing & Navigating</h2>
-                <p class="text-gray-600 mb-6">Keeping your local copy up-to-date and moving between different lines of work (branches) is crucial for collaboration.</p>
+            <!-- PAGE 3: Key Products Portfolio -->
+            <section id="page-products" class="page hidden">
+                <h2 class="text-3xl font-bold text-gray-900 mb-6 border-b-2 border-indigo-200 pb-2 flex items-center gap-3">
+                    <span class="text-4xl">🎯</span> Key Products & Platforms Portfolio
+                </h2>
                 
-                <div class="mt-6">
-                    <h3 class="text-lg font-semibold text-[#007FFF]">Fetch vs. Pull: What's the difference?</h3>
-                    <div class="grid grid-cols-2 gap-4 mt-2">
-                        <div class="border rounded-lg p-4">
-                            <p class="font-bold mono">git fetch</p>
-                            <p class="text-sm text-gray-600">Downloads new data from the remote but <span class="font-bold">does not</span> integrate it into your working files. It's a safe way to see what's new.</p>
+                <p class="text-gray-700 mb-6 text-center italic">
+                    Leading 12+ strategic products across Partner ecosystem, generating billions in revenue
+                </p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                    
+                    <!-- Product 1: AWS Marketplace -->
+                    <div class="executive-card bg-gradient-to-br from-orange-50 to-red-50 p-5 rounded-2xl border-2 border-orange-300 hover:border-orange-500">
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="w-12 h-12 bg-gradient-to-br from-orange-500 to-red-500 rounded-lg flex items-center justify-center shadow-md">
+                                <span class="text-2xl">☁️</span>
+                            </div>
+                            <h3 class="text-lg font-bold text-gray-900">AWS Marketplace</h3>
                         </div>
-                        <div class="border rounded-lg p-4">
-                            <p class="font-bold mono">git pull</p>
-                            <p class="text-sm text-gray-600">Downloads new data <span class="font-bold">and</span> immediately tries to merge it into your current branch. It's a fetch + merge.</p>
+                        <p class="text-sm text-gray-700 mb-2">Cloud marketplace integration</p>
+                        <div class="bg-orange-100 px-3 py-2 rounded-lg">
+                            <p class="impact-number text-2xl font-black">>$1Bn</p>
+                            <p class="text-xs text-orange-700">Revenue Channel</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Product 2: PRM -->
+                    <div class="executive-card bg-gradient-to-br from-blue-50 to-indigo-50 p-5 rounded-2xl border-2 border-blue-300 hover:border-blue-500">
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-indigo-500 rounded-lg flex items-center justify-center shadow-md">
+                                <span class="text-2xl">🤝</span>
+                            </div>
+                            <h3 class="text-lg font-bold text-gray-900">Partner Relationship Mgmt</h3>
+                        </div>
+                        <p class="text-sm text-gray-700 mb-2">First PRM implementation</p>
+                        <div class="bg-blue-100 px-3 py-2 rounded-lg">
+                            <p class="text-sm font-bold text-blue-800">30% Faster Deals</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Product 3: Channel Order App -->
+                    <div class="executive-card bg-gradient-to-br from-green-50 to-emerald-50 p-5 rounded-2xl border-2 border-green-300 hover:border-green-500">
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-500 rounded-lg flex items-center justify-center shadow-md">
+                                <span class="text-2xl">📦</span>
+                            </div>
+                            <h3 class="text-lg font-bold text-gray-900">Channel Order App</h3>
+                        </div>
+                        <p class="text-sm text-gray-700 mb-2">For ISV/OEM Partners</p>
+                        <div class="bg-green-100 px-3 py-2 rounded-lg">
+                            <p class="impact-number text-2xl font-black">~$1Bn</p>
+                            <p class="text-xs text-green-700">Annual Channel</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Product 4: Transactable Marketplace -->
+                    <div class="executive-card bg-gradient-to-br from-purple-50 to-pink-50 p-5 rounded-2xl border-2 border-purple-300 hover:border-purple-500">
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg flex items-center justify-center shadow-md">
+                                <span class="text-2xl">🛒</span>
+                            </div>
+                            <h3 class="text-lg font-bold text-gray-900">Transactable Marketplace</h3>
+                        </div>
+                        <p class="text-sm text-gray-700">Enable partner transactions</p>
+                    </div>
+                    
+                    <!-- Product 5: ISV Lead Share -->
+                    <div class="executive-card bg-gradient-to-br from-cyan-50 to-blue-50 p-5 rounded-2xl border-2 border-cyan-300 hover:border-cyan-500">
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="w-12 h-12 bg-gradient-to-br from-cyan-500 to-blue-500 rounded-lg flex items-center justify-center shadow-md">
+                                <span class="text-2xl">💬</span>
+                            </div>
+                            <h3 class="text-lg font-bold text-gray-900">ISV Lead Share</h3>
+                        </div>
+                        <p class="text-sm text-gray-700">Slack integration for leads</p>
+                    </div>
+                    
+                    <!-- Product 6: Partner Rebates -->
+                    <div class="executive-card bg-gradient-to-br from-yellow-50 to-amber-50 p-5 rounded-2xl border-2 border-yellow-300 hover:border-yellow-500">
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="w-12 h-12 bg-gradient-to-br from-yellow-500 to-amber-500 rounded-lg flex items-center justify-center shadow-md">
+                                <span class="text-2xl">💰</span>
+                            </div>
+                            <h3 class="text-lg font-bold text-gray-900">Partner Rebates</h3>
+                        </div>
+                        <p class="text-sm text-gray-700">Incentive management system</p>
+                    </div>
+                    
+                    <!-- Product 7: Reseller Order Automation -->
+                    <div class="executive-card bg-gradient-to-br from-red-50 to-orange-50 p-5 rounded-2xl border-2 border-red-300 hover:border-red-500">
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="w-12 h-12 bg-gradient-to-br from-red-500 to-orange-500 rounded-lg flex items-center justify-center shadow-md">
+                                <span class="text-2xl">⚡</span>
+                            </div>
+                            <h3 class="text-lg font-bold text-gray-900">Reseller Order Automation</h3>
+                        </div>
+                        <p class="text-sm text-gray-700">Streamlined order processing</p>
+                    </div>
+                    
+                    <!-- Product 8: Partner Co-Marketing -->
+                    <div class="executive-card bg-gradient-to-br from-indigo-50 to-purple-50 p-5 rounded-2xl border-2 border-indigo-300 hover:border-indigo-500">
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="w-12 h-12 bg-gradient-to-br from-indigo-500 to-purple-500 rounded-lg flex items-center justify-center shadow-md">
+                                <span class="text-2xl">📢</span>
+                            </div>
+                            <h3 class="text-lg font-bold text-gray-900">Partner Co-Marketing</h3>
+                        </div>
+                        <p class="text-sm text-gray-700">Previously AMP Program</p>
+                    </div>
+                    
+                    <!-- Product 9: AppExchange Checkout -->
+                    <div class="executive-card bg-gradient-to-br from-teal-50 to-cyan-50 p-5 rounded-2xl border-2 border-teal-300 hover:border-teal-500">
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="w-12 h-12 bg-gradient-to-br from-teal-500 to-cyan-500 rounded-lg flex items-center justify-center shadow-md">
+                                <span class="text-2xl">🛍️</span>
+                            </div>
+                            <h3 class="text-lg font-bold text-gray-900">AppExchange Checkout</h3>
+                        </div>
+                        <p class="text-sm text-gray-700">KLO only implementation</p>
+                    </div>
+                    
+                    <!-- Product 10: MSP Managed Apps -->
+                    <div class="executive-card bg-gradient-to-br from-lime-50 to-green-50 p-5 rounded-2xl border-2 border-lime-300 hover:border-lime-500">
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="w-12 h-12 bg-gradient-to-br from-lime-500 to-green-500 rounded-lg flex items-center justify-center shadow-md">
+                                <span class="text-2xl">🔧</span>
+                            </div>
+                            <h3 class="text-lg font-bold text-gray-900">MSP Managed Apps</h3>
+                        </div>
+                        <p class="text-sm text-gray-700">Managed service provider tools</p>
+                    </div>
+                    
+                    <!-- Product 11: Partner Learning Camp -->
+                    <div class="executive-card bg-gradient-to-br from-pink-50 to-rose-50 p-5 rounded-2xl border-2 border-pink-300 hover:border-pink-500">
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="w-12 h-12 bg-gradient-to-br from-pink-500 to-rose-500 rounded-lg flex items-center justify-center shadow-md">
+                                <span class="text-2xl">🎓</span>
+                            </div>
+                            <h3 class="text-lg font-bold text-gray-900">Partner Learning Camp</h3>
+                        </div>
+                        <p class="text-sm text-gray-700">Training & enablement platform</p>
+                    </div>
+                    
+                    <!-- Product 12: Partner Referral Mgmt -->
+                    <div class="executive-card bg-gradient-to-br from-violet-50 to-purple-50 p-5 rounded-2xl border-2 border-violet-300 hover:border-violet-500">
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="w-12 h-12 bg-gradient-to-br from-violet-500 to-purple-500 rounded-lg flex items-center justify-center shadow-md">
+                                <span class="text-2xl">🔄</span>
+                            </div>
+                            <h3 class="text-lg font-bold text-gray-900">Partner Referral System</h3>
+                        </div>
+                        <p class="text-sm text-gray-700">Referral management platform</p>
+                    </div>
+                    
+                </div>
+                
+                <!-- Summary Stats -->
+                <div class="mt-8 bg-gradient-to-r from-indigo-100 via-purple-100 to-pink-100 p-6 rounded-2xl">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
+                        <div>
+                            <p class="impact-number text-4xl font-black">12+</p>
+                            <p class="text-sm text-gray-700 font-semibold">Products Managed</p>
+                        </div>
+                        <div>
+                            <p class="impact-number text-4xl font-black">>$2Bn</p>
+                            <p class="text-sm text-gray-700 font-semibold">Revenue Impact</p>
+                        </div>
+                        <div>
+                            <p class="impact-number text-4xl font-black">Global</p>
+                            <p class="text-sm text-gray-700 font-semibold">Partner Ecosystem</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PAGE 4: Leadership & Core Capabilities -->
+            <section id="page-leadership" class="page hidden">
+                <h2 class="text-3xl font-bold text-gray-900 mb-6 border-b-2 border-indigo-200 pb-2 flex items-center gap-3">
+                    <span class="text-4xl">👨‍💼</span> Leadership, Team Structure & Capabilities
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    
+                    <!-- Card 1: Team Structure - Enhanced with Clickable Details -->
+                    <div class="bg-gradient-to-br from-indigo-50 to-purple-50 p-6 rounded-2xl border-2 border-indigo-300 executive-card hover:border-indigo-500 cursor-pointer" id="card-team" onclick="toggleDetails('team', this)">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="text-4xl">👥</div>
+                            <h3 class="text-xl font-bold text-indigo-900">Team Structure</h3>
+                        </div>
+                        
+                        <!-- Summary Stats -->
+                        <div class="grid grid-cols-2 gap-3 mb-4">
+                            <div class="bg-white p-3 rounded-lg text-center border-l-4 border-indigo-600">
+                                <p class="impact-number text-3xl font-black">19</p>
+                                <p class="text-xs text-gray-600">👔 FTE's</p>
+                            </div>
+                            <div class="bg-white p-3 rounded-lg text-center border-l-4 border-purple-600">
+                                <p class="impact-number text-3xl font-black">44</p>
+                                <p class="text-xs text-gray-600">💼 Contractors</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Toggle Indicator -->
+                        <div class="mt-auto text-indigo-600 flex justify-between items-center pt-3 border-t-2 border-indigo-200">
+                            <span class="text-sm font-semibold flex items-center gap-2">
+                                <span class="text-lg">🔍</span> Click for Details
+                            </span>
+                            <svg id="arrow-team" class="w-6 h-6 transition-transform duration-300 transform rotate-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </div>
+                        
+                        <!-- Collapsible Details -->
+                        <div id="details-team" class="mt-4 border-t-2 border-indigo-300 pt-4 details-container">
+                            <ul class="text-gray-700 space-y-3 text-sm">
+                                <li class="flex items-start gap-2 bg-white p-2 rounded-lg">
+                                    <span class="text-indigo-600 font-bold">⚖️</span>
+                                    <span>FTE / Contractor Ratio: <strong>1 : 2.4</strong></span>
+                                </li>
+                                <li class="flex items-start gap-2 bg-white p-2 rounded-lg">
+                                    <span class="text-indigo-600 font-bold">👨‍💼</span>
+                                    <span>Engineering Managers: <strong>2</strong></span>
+                                </li>
+                                <li class="flex items-start gap-2 bg-white p-2 rounded-lg">
+                                    <span class="text-indigo-600 font-bold">🏃</span>
+                                    <span>Scrum Teams: <strong>5 FTE-based + 2 Contractor-only</strong></span>
+                                </li>
+                                <li class="flex items-start gap-2 bg-white p-2 rounded-lg">
+                                    <span class="text-indigo-600 font-bold">📐</span>
+                                    <span>Focus: Engineering rigor & LLDs</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Card 2: Domain Expertise -->
+                    <div class="bg-gradient-to-br from-cyan-50 to-blue-50 p-6 rounded-2xl border-2 border-cyan-300 executive-card hover:border-cyan-500">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="text-4xl">🎓</div>
+                            <h3 class="text-xl font-bold text-cyan-900">Core Expertise</h3>
+                        </div>
+                        <div class="space-y-3">
+                            <div class="bg-white p-3 rounded-lg border-l-4 border-cyan-600">
+                                <p class="text-sm font-bold text-cyan-900 mb-1">💰 Q2C/O2C</p>
+                                <p class="text-xs text-gray-600">Quote to Cash & Order to Cash end-to-end</p>
+                            </div>
+                            <div class="bg-white p-3 rounded-lg border-l-4 border-blue-600">
+                                <p class="text-sm font-bold text-blue-900 mb-1">🤝 Partner Systems</p>
+                                <p class="text-xs text-gray-600">PRM, Channel Order App, AWS Marketplace</p>
+                            </div>
+                            <div class="bg-white p-3 rounded-lg border-l-4 border-indigo-600">
+                                <p class="text-sm font-bold text-indigo-900 mb-1">🤖 Technology</p>
+                                <p class="text-xs text-gray-600">AI/ML, Salesforce Clouds, Tableau</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 3: Innovation & Strategy -->
+                    <div class="bg-gradient-to-br from-orange-50 to-yellow-50 p-6 rounded-2xl border-2 border-orange-300 executive-card hover:border-orange-500">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="text-4xl">💡</div>
+                            <h3 class="text-xl font-bold text-orange-900">Innovation</h3>
+                        </div>
+                        <ul class="text-gray-700 space-y-3 text-sm">
+                            <li class="flex items-start gap-2">
+                                <span class="text-orange-600 font-bold">🌍</span>
+                                <span><strong>Go-to-Market Strategy</strong> via Reseller creation</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-orange-600 font-bold">🚀</span>
+                                <span>Pioneering <strong>first PRM</strong> implementation</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-orange-600 font-bold">💎</span>
+                                <span>Creating <strong>>$1Bn</strong> revenue streams</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-orange-600 font-bold">🤖</span>
+                                <span>AI/ML-driven <strong>Early Warning Systems</strong></span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                </div>
+                
+                <!-- Team Structure Visual Presentation Link -->
+                <div class="mt-8">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+                        <span>📊</span> Team Structure & Organization Visuals
+                    </h3>
+                    
+                    <div class="executive-card bg-gradient-to-r from-blue-50 via-indigo-50 to-purple-50 p-8 rounded-2xl border-2 border-indigo-300 hover:border-indigo-500 cursor-pointer transition-all duration-300 hover:shadow-2xl transform hover:scale-[1.02]" onclick="window.open('https://docs.google.com/presentation/d/1QgnbvvADm7vM9oAShVKkCWE-1nSSCWLT0eRUb02u4vQ/edit?slide=id.g3893effa7c0_0_0#slide=id.g3893effa7c0_0_0', '_blank')">
+                        <div class="flex flex-col md:flex-row items-center gap-6">
+                            <!-- Icon -->
+                            <div class="flex-shrink-0">
+                                <div class="w-24 h-24 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl flex items-center justify-center shadow-xl transform hover:scale-110 transition-transform">
+                                    <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                            
+                            <!-- Content -->
+                            <div class="flex-grow text-center md:text-left">
+                                <h4 class="text-2xl font-bold text-indigo-900 mb-2">
+                                    View Detailed Team Structure Presentation
+                                </h4>
+                                <p class="text-gray-700 mb-4">
+                                    Interactive slides with comprehensive team organization charts, scrum team structure, and visual breakdowns
+                                </p>
+                                <div class="flex flex-wrap gap-3 justify-center md:justify-start">
+                                    <span class="px-4 py-2 bg-indigo-100 text-indigo-800 rounded-full text-sm font-semibold">📊 Org Charts</span>
+                                    <span class="px-4 py-2 bg-purple-100 text-purple-800 rounded-full text-sm font-semibold">🏃 Scrum Teams</span>
+                                    <span class="px-4 py-2 bg-blue-100 text-blue-800 rounded-full text-sm font-semibold">👥 Team Breakdown</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Arrow -->
+                            <div class="flex-shrink-0">
+                                <div class="w-12 h-12 bg-indigo-600 rounded-full flex items-center justify-center shadow-lg animate-pulse">
+                                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Hover hint -->
+                        <div class="mt-4 text-center">
+                            <p class="text-sm text-indigo-600 font-semibold flex items-center justify-center gap-2">
+                                <span class="animate-pulse">🖱️</span> Click to open Google Slides presentation in new tab
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <p class="text-sm text-gray-600 italic mt-4 text-center">
+                        💡 Complete visual representation with detailed org charts and team structure diagrams
+                    </p>
+                </div>
+            </section>
+
+            <!-- PAGE 6: Innovations -->
+            <section id="page-innovations" class="page hidden">
+                <h2 class="text-3xl font-bold text-gray-900 mb-6 border-b-2 border-indigo-200 pb-2 flex items-center gap-3">
+                    <span>💡</span> Innovations & Technical Excellence
+                </h2>
+                
+                <p class="text-lg text-gray-700 mb-8 leading-relaxed">
+                    Pioneering innovative solutions and leveraging cutting-edge technologies to solve complex business challenges
+                </p>
+
+                <!-- Innovations Grid -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    
+                    <!-- Innovation 1: Data Seeding -->
+                    <div class="executive-card bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50 p-6 rounded-2xl border-2 border-green-300 hover:border-green-500 transform hover:scale-[1.02] transition-all duration-300">
+                        <div class="flex items-start gap-4">
+                            <div class="flex-shrink-0">
+                                <div class="w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-600 rounded-xl flex items-center justify-center shadow-lg">
+                                    <span class="text-3xl">🚀</span>
+                                </div>
+                            </div>
+                            <div class="flex-grow">
+                                <h3 class="text-xl font-bold text-gray-900 mb-2 flex items-center gap-2">
+                                    Data Seeding
+                                    <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-xs font-semibold">First Ever</span>
+                                </h3>
+                                <p class="text-gray-700 leading-relaxed">
+                                    First team ever to solve the problem of scalable data seeding into sandboxes at <span class="font-bold text-green-700">30% faster rate</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Innovation 2: Synthetic Monitoring -->
+                    <div class="executive-card bg-gradient-to-br from-blue-50 via-indigo-50 to-blue-50 p-6 rounded-2xl border-2 border-blue-300 hover:border-blue-500 transform hover:scale-[1.02] transition-all duration-300">
+                        <div class="flex items-start gap-4">
+                            <div class="flex-shrink-0">
+                                <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl flex items-center justify-center shadow-lg">
+                                    <span class="text-3xl">🤖</span>
+                                </div>
+                            </div>
+                            <div class="flex-grow">
+                                <h3 class="text-xl font-bold text-gray-900 mb-2 flex items-center gap-2">
+                                    Synthetic Monitoring
+                                    <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-xs font-semibold">AI-Powered</span>
+                                </h3>
+                                <p class="text-gray-700 leading-relaxed">
+                                    First team to generate <span class="font-bold text-blue-700">monitoring scripts using AI</span>, automating complex monitoring workflows
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Innovation 3: Semantic Similarity -->
+                    <div class="executive-card bg-gradient-to-br from-purple-50 via-violet-50 to-purple-50 p-6 rounded-2xl border-2 border-purple-300 hover:border-purple-500 transform hover:scale-[1.02] transition-all duration-300">
+                        <div class="flex items-start gap-4">
+                            <div class="flex-shrink-0">
+                                <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-violet-600 rounded-xl flex items-center justify-center shadow-lg">
+                                    <span class="text-3xl">🔍</span>
+                                </div>
+                            </div>
+                            <div class="flex-grow">
+                                <h3 class="text-xl font-bold text-gray-900 mb-2 flex items-center gap-2">
+                                    Semantic Similarity at Scale
+                                    <span class="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-xs font-semibold">Gemini + NotebookLM</span>
+                                </h3>
+                                <p class="text-gray-700 leading-relaxed">
+                                    Used Gemini and NotebookLM to find <span class="font-bold text-purple-700">article similarity at scale for Agentforce</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Innovation 4: Fusion Models -->
+                    <div class="executive-card bg-gradient-to-br from-orange-50 via-amber-50 to-orange-50 p-6 rounded-2xl border-2 border-orange-300 hover:border-orange-500 transform hover:scale-[1.02] transition-all duration-300">
+                        <div class="flex items-start gap-4">
+                            <div class="flex-shrink-0">
+                                <div class="w-16 h-16 bg-gradient-to-br from-orange-500 to-amber-600 rounded-xl flex items-center justify-center shadow-lg">
+                                    <span class="text-3xl">⚡</span>
+                                </div>
+                            </div>
+                            <div class="flex-grow">
+                                <h3 class="text-xl font-bold text-gray-900 mb-2 flex items-center gap-2">
+                                    Fusion Models
+                                    <span class="px-3 py-1 bg-orange-100 text-orange-800 rounded-full text-xs font-semibold">Advanced RAG</span>
+                                </h3>
+                                <p class="text-gray-700 leading-relaxed">
+                                    First team to use the advanced <span class="font-bold text-orange-700">"Reciprocal Rank Fusion" model</span> for effective RAG
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Innovation 5: Apex Mockery -->
+                    <div class="executive-card bg-gradient-to-br from-red-50 via-pink-50 to-red-50 p-6 rounded-2xl border-2 border-red-300 hover:border-red-500 transform hover:scale-[1.02] transition-all duration-300">
+                        <div class="flex items-start gap-4">
+                            <div class="flex-shrink-0">
+                                <div class="w-16 h-16 bg-gradient-to-br from-red-500 to-pink-600 rounded-xl flex items-center justify-center shadow-lg">
+                                    <span class="text-3xl">⚙️</span>
+                                </div>
+                            </div>
+                            <div class="flex-grow">
+                                <h3 class="text-xl font-bold text-gray-900 mb-2 flex items-center gap-2">
+                                    Apex Mockery
+                                    <span class="px-3 py-1 bg-red-100 text-red-800 rounded-full text-xs font-semibold">10X Faster</span>
+                                </h3>
+                                <p class="text-gray-700 leading-relaxed">
+                                    Used Apex Mockery for <span class="font-bold text-red-700">10X faster testing</span>, significantly improving development velocity
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- More Innovations Coming -->
+                    <div class="executive-card bg-gradient-to-br from-gray-50 via-slate-50 to-gray-50 p-6 rounded-2xl border-2 border-gray-300 hover:border-indigo-500 transform hover:scale-[1.02] transition-all duration-300">
+                        <div class="flex items-center justify-center h-full">
+                            <div class="text-center">
+                                <div class="w-16 h-16 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg mx-auto mb-3">
+                                    <span class="text-3xl">🚧</span>
+                                </div>
+                                <h3 class="text-xl font-bold text-gray-900 mb-2">
+                                    More Innovations Coming Up...
+                                </h3>
+                                <p class="text-gray-600 text-sm italic">
+                                    Continuously pushing boundaries
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Summary Stats -->
+                <div class="mt-10 bg-gradient-to-r from-indigo-50 via-purple-50 to-pink-50 p-6 rounded-2xl border-2 border-indigo-200">
+                    <div class="flex flex-wrap justify-around gap-6 text-center">
+                        <div>
+                            <div class="text-4xl font-bold text-indigo-700">6+</div>
+                            <div class="text-sm text-gray-600 mt-1">Innovations</div>
+                        </div>
+                        <div>
+                            <div class="text-4xl font-bold text-purple-700">3</div>
+                            <div class="text-sm text-gray-600 mt-1">Industry Firsts</div>
+                        </div>
+                        <div>
+                            <div class="text-4xl font-bold text-pink-700">AI-First</div>
+                            <div class="text-sm text-gray-600 mt-1">Approach</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PAGE 7: Appreciations -->
+            <section id="page-appreciations" class="page hidden">
+                <h2 class="text-3xl font-bold text-gray-900 mb-6 border-b-2 border-indigo-200 pb-2 flex items-center gap-3">
+                    <span>🏆</span> Recognition & Appreciations
+                </h2>
+                
+                <p class="text-lg text-gray-700 mb-8 leading-relaxed">
+                    Recognized for exceptional contributions, leadership, and impactful presentations across the organization
+                </p>
+
+                <!-- Appreciations List -->
+                <div class="space-y-6">
+                    
+                    <!-- Appreciation 1: Executive Leadership -->
+                    <div class="executive-card bg-gradient-to-br from-amber-50 via-yellow-50 to-amber-50 p-8 rounded-2xl border-2 border-amber-300 hover:border-amber-500 transform hover:scale-[1.01] transition-all duration-300">
+                        <div class="flex items-start gap-6">
+                            <div class="flex-shrink-0">
+                                <div class="w-20 h-20 bg-gradient-to-br from-amber-400 to-yellow-500 rounded-2xl flex items-center justify-center shadow-xl">
+                                    <span class="text-4xl">🌟</span>
+                                </div>
+                            </div>
+                            <div class="flex-grow">
+                                <h3 class="text-2xl font-bold text-gray-900 mb-3 flex items-center gap-3 flex-wrap">
+                                    Executive Leadership Recognition
+                                    <span class="px-4 py-1 bg-amber-100 text-amber-800 rounded-full text-sm font-semibold">EVP+ & VP+ Level</span>
+                                </h3>
+                                <p class="text-lg text-gray-700 leading-relaxed mb-3">
+                                    Received <span class="font-bold text-amber-700">multiple appreciations</span> from Business Executive leadership at EVP+ and VP+ levels
+                                </p>
+                                <div class="flex gap-3 flex-wrap">
+                                    <span class="px-3 py-1 bg-amber-50 text-amber-800 rounded-full text-sm border border-amber-200">🎯 Strategic Impact</span>
+                                    <span class="px-3 py-1 bg-amber-50 text-amber-800 rounded-full text-sm border border-amber-200">💼 Business Value</span>
+                                    <span class="px-3 py-1 bg-amber-50 text-amber-800 rounded-full text-sm border border-amber-200">🚀 Innovation</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Appreciation 2: TDX Bangalore 2025 -->
+                    <div class="executive-card bg-gradient-to-br from-blue-50 via-indigo-50 to-blue-50 p-8 rounded-2xl border-2 border-blue-300 hover:border-blue-500 transform hover:scale-[1.01] transition-all duration-300">
+                        <div class="flex items-start gap-6">
+                            <div class="flex-shrink-0">
+                                <div class="w-20 h-20 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center shadow-xl">
+                                    <span class="text-4xl">🎤</span>
+                                </div>
+                            </div>
+                            <div class="flex-grow">
+                                <h3 class="text-2xl font-bold text-gray-900 mb-3 flex items-center gap-3 flex-wrap">
+                                    TDX Bangalore 2025 Speaker
+                                    <span class="px-4 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-semibold">2 Sessions</span>
+                                </h3>
+                                <p class="text-lg text-gray-700 leading-relaxed mb-3">
+                                    Presented at <span class="font-bold text-blue-700">TDX Bangalore 2025 (twice)</span> with a large audience, achieving one of the <span class="font-bold text-blue-700">highest CSAT scores</span>
+                                </p>
+                                <div class="flex gap-3 flex-wrap">
+                                    <span class="px-3 py-1 bg-blue-50 text-blue-800 rounded-full text-sm border border-blue-200">📊 High CSAT</span>
+                                    <span class="px-3 py-1 bg-blue-50 text-blue-800 rounded-full text-sm border border-blue-200">👥 Large Audience</span>
+                                    <span class="px-3 py-1 bg-blue-50 text-blue-800 rounded-full text-sm border border-blue-200">🇮🇳 Bangalore 2025</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Appreciation 3: Agentforce Learning Series -->
+                    <div class="executive-card bg-gradient-to-br from-green-50 via-emerald-50 to-green-50 p-8 rounded-2xl border-2 border-green-300 hover:border-green-500 transform hover:scale-[1.01] transition-all duration-300">
+                        <div class="flex items-start gap-6">
+                            <div class="flex-shrink-0">
+                                <div class="w-20 h-20 bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl flex items-center justify-center shadow-xl">
+                                    <span class="text-4xl">🎓</span>
+                                </div>
+                            </div>
+                            <div class="flex-grow">
+                                <h3 class="text-2xl font-bold text-gray-900 mb-3 flex items-center gap-3 flex-wrap">
+                                    Agentforce Learning Series
+                                    <span class="px-4 py-1 bg-green-100 text-green-800 rounded-full text-sm font-semibold">Featured Speaker</span>
+                                </h3>
+                                <p class="text-lg text-gray-700 leading-relaxed mb-3">
+                                    Presented at <span class="font-bold text-green-700">Agentforce Learning Series</span> with <span class="font-bold text-green-700">huge appreciation</span> from attendees and stakeholders
+                                </p>
+                                <div class="flex gap-3 flex-wrap">
+                                    <span class="px-3 py-1 bg-green-50 text-green-800 rounded-full text-sm border border-green-200">🤖 Agentforce</span>
+                                    <span class="px-3 py-1 bg-green-50 text-green-800 rounded-full text-sm border border-green-200">📚 Knowledge Sharing</span>
+                                    <span class="px-3 py-1 bg-green-50 text-green-800 rounded-full text-sm border border-green-200">⭐ High Impact</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Summary Stats -->
+                <div class="mt-10 bg-gradient-to-r from-amber-50 via-yellow-50 to-amber-50 p-6 rounded-2xl border-2 border-amber-200">
+                    <div class="flex flex-wrap justify-around gap-6 text-center">
+                        <div>
+                            <div class="text-4xl font-bold text-amber-700">EVP+</div>
+                            <div class="text-sm text-gray-600 mt-1">Leadership Recognition</div>
+                        </div>
+                        <div>
+                            <div class="text-4xl font-bold text-blue-700">2</div>
+                            <div class="text-sm text-gray-600 mt-1">TDX Sessions</div>
+                        </div>
+                        <div>
+                            <div class="text-4xl font-bold text-green-700">High CSAT</div>
+                            <div class="text-sm text-gray-600 mt-1">Audience Ratings</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PAGE 8: Team Bonding -->
+            <section id="page-bonding" class="page hidden">
+                <h2 class="text-3xl font-bold text-gray-900 mb-6 border-b-2 border-indigo-200 pb-2 flex items-center gap-3">
+                    <span>🤝</span> Team Bonding & Culture
+                </h2>
+                
+                <p class="text-lg text-gray-700 mb-8 leading-relaxed">
+                    Building a strong, cohesive team through shared experiences, celebrations, and giving back to the community
+                </p>
+
+                <!-- Team Bonding Activities Grid -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    
+                    <!-- Activity 1: Hub Fests -->
+                    <div class="executive-card bg-gradient-to-br from-pink-50 via-rose-50 to-pink-50 p-6 rounded-2xl border-2 border-pink-300 hover:border-pink-500 transform hover:scale-[1.02] transition-all duration-300">
+                        <div class="flex items-start gap-4">
+                            <div class="flex-shrink-0">
+                                <div class="w-16 h-16 bg-gradient-to-br from-pink-500 to-rose-600 rounded-xl flex items-center justify-center shadow-lg">
+                                    <span class="text-3xl">🎉</span>
+                                </div>
+                            </div>
+                            <div class="flex-grow">
+                                <h3 class="text-xl font-bold text-gray-900 mb-2 flex items-center gap-2">
+                                    Hub Fests Champion
+                                    <span class="px-3 py-1 bg-pink-100 text-pink-800 rounded-full text-xs font-semibold">Winner</span>
+                                </h3>
+                                <p class="text-gray-700 leading-relaxed">
+                                    Participated and <span class="font-bold text-pink-700">won in various hub fests</span> as a partner team, showcasing teamwork and competitive spirit
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Activity 2: GTM Symphony -->
+                    <div class="executive-card bg-gradient-to-br from-yellow-50 via-amber-50 to-yellow-50 p-6 rounded-2xl border-2 border-yellow-300 hover:border-yellow-500 transform hover:scale-[1.02] transition-all duration-300">
+                        <div class="flex items-start gap-4">
+                            <div class="flex-shrink-0">
+                                <div class="w-16 h-16 bg-gradient-to-br from-yellow-500 to-amber-600 rounded-xl flex items-center justify-center shadow-lg">
+                                    <span class="text-3xl">🏆</span>
+                                </div>
+                            </div>
+                            <div class="flex-grow">
+                                <h3 class="text-xl font-bold text-gray-900 mb-2 flex items-center gap-2">
+                                    GTM Symphony Winner
+                                    <span class="px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-xs font-semibold">1st Place</span>
+                                </h3>
+                                <p class="text-gray-700 leading-relaxed">
+                                    Partner team won <span class="font-bold text-yellow-700">first place in GTM Symphony</span>, demonstrating excellence and collaboration
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Activity 3: Volunteering -->
+                    <div class="executive-card bg-gradient-to-br from-green-50 via-emerald-50 to-green-50 p-6 rounded-2xl border-2 border-green-300 hover:border-green-500 transform hover:scale-[1.02] transition-all duration-300">
+                        <div class="flex items-start gap-4">
+                            <div class="flex-shrink-0">
+                                <div class="w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-600 rounded-xl flex items-center justify-center shadow-lg">
+                                    <span class="text-3xl">❤️</span>
+                                </div>
+                            </div>
+                            <div class="flex-grow">
+                                <h3 class="text-xl font-bold text-gray-900 mb-2 flex items-center gap-2">
+                                    Community Volunteering
+                                    <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-xs font-semibold">Giving Back</span>
+                                </h3>
+                                <p class="text-gray-700 leading-relaxed">
+                                    Team <span class="font-bold text-green-700">volunteers together to give back to society</span>, making a positive impact in the community
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Activity 4: Marathons -->
+                    <div class="executive-card bg-gradient-to-br from-blue-50 via-cyan-50 to-blue-50 p-6 rounded-2xl border-2 border-blue-300 hover:border-blue-500 transform hover:scale-[1.02] transition-all duration-300">
+                        <div class="flex items-start gap-4">
+                            <div class="flex-shrink-0">
+                                <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-cyan-600 rounded-xl flex items-center justify-center shadow-lg">
+                                    <span class="text-3xl">🏃</span>
+                                </div>
+                            </div>
+                            <div class="flex-grow">
+                                <h3 class="text-xl font-bold text-gray-900 mb-2 flex items-center gap-2">
+                                    Annual Marathons
+                                    <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-xs font-semibold">Every Year</span>
+                                </h3>
+                                <p class="text-gray-700 leading-relaxed">
+                                    Team <span class="font-bold text-blue-700">participates in marathons every year</span>, promoting health and team unity
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Activity 5: Social Events -->
+                    <div class="executive-card bg-gradient-to-br from-purple-50 via-violet-50 to-purple-50 p-6 rounded-2xl border-2 border-purple-300 hover:border-purple-500 transform hover:scale-[1.02] transition-all duration-300">
+                        <div class="flex items-start gap-4">
+                            <div class="flex-shrink-0">
+                                <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-violet-600 rounded-xl flex items-center justify-center shadow-lg">
+                                    <span class="text-3xl">🎊</span>
+                                </div>
+                            </div>
+                            <div class="flex-grow">
+                                <h3 class="text-xl font-bold text-gray-900 mb-2 flex items-center gap-2">
+                                    Team Social Events
+                                    <span class="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-xs font-semibold">Regular</span>
+                                </h3>
+                                <p class="text-gray-700 leading-relaxed">
+                                    Regular <span class="font-bold text-purple-700">team social events</span> to strengthen bonds and celebrate together
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- More Activities -->
+                    <div class="executive-card bg-gradient-to-br from-indigo-50 via-blue-50 to-indigo-50 p-6 rounded-2xl border-2 border-indigo-300 hover:border-indigo-500 transform hover:scale-[1.02] transition-all duration-300">
+                        <div class="flex items-center justify-center h-full">
+                            <div class="text-center">
+                                <div class="w-16 h-16 bg-gradient-to-br from-indigo-500 to-blue-600 rounded-xl flex items-center justify-center shadow-lg mx-auto mb-3">
+                                    <span class="text-3xl">✨</span>
+                                </div>
+                                <h3 class="text-xl font-bold text-gray-900 mb-2">
+                                    And Many More...
+                                </h3>
+                                <p class="text-gray-600 text-sm italic">
+                                    Continuously building team spirit
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Team Bonding Gallery Link -->
+                <div class="mt-10">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+                        <span>📸</span> Team Bonding Gallery - Pictures & Videos
+                    </h3>
+                    
+                    <div class="executive-card bg-gradient-to-r from-pink-50 via-purple-50 to-indigo-50 p-8 rounded-2xl border-2 border-pink-300 hover:border-pink-500 cursor-pointer transition-all duration-300 hover:shadow-2xl transform hover:scale-[1.02]" onclick="window.open('https://docs.google.com/presentation/d/1BoSEUXYRJeFTq6oJGVl_pqbLfleuxPuWOtHYBfSSRLM/edit?slide=id.g375a91728cd_0_35#slide=id.g375a91728cd_0_35', '_blank')">
+                        <div class="flex flex-col md:flex-row items-center gap-6">
+                            <!-- Icon -->
+                            <div class="flex-shrink-0">
+                                <div class="w-24 h-24 bg-gradient-to-br from-pink-500 to-purple-600 rounded-2xl flex items-center justify-center shadow-xl transform hover:scale-110 transition-transform">
+                                    <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                            
+                            <!-- Content -->
+                            <div class="flex-grow text-center md:text-left">
+                                <h4 class="text-2xl font-bold text-pink-900 mb-2">
+                                    View Team Bonding Moments
+                                </h4>
+                                <p class="text-gray-700 mb-4">
+                                    Explore our photo and video gallery showcasing memorable team bonding experiences, events, and celebrations
+                                </p>
+                                <div class="flex flex-wrap gap-3 justify-center md:justify-start">
+                                    <span class="px-4 py-2 bg-pink-100 text-pink-800 rounded-full text-sm font-semibold">📸 Photos</span>
+                                    <span class="px-4 py-2 bg-purple-100 text-purple-800 rounded-full text-sm font-semibold">🎥 Videos</span>
+                                    <span class="px-4 py-2 bg-indigo-100 text-indigo-800 rounded-full text-sm font-semibold">🎉 Celebrations</span>
+                                    <span class="px-4 py-2 bg-rose-100 text-rose-800 rounded-full text-sm font-semibold">🏆 Events</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Arrow -->
+                            <div class="flex-shrink-0">
+                                <div class="w-12 h-12 bg-pink-600 rounded-full flex items-center justify-center shadow-lg animate-pulse">
+                                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Hover hint -->
+                        <div class="mt-4 text-center">
+                            <p class="text-sm text-pink-600 font-semibold flex items-center justify-center gap-2">
+                                <span class="animate-pulse">🖱️</span> Click to open photo & video gallery in new tab
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <p class="text-sm text-gray-600 italic mt-4 text-center">
+                        💝 Capturing the spirit of our amazing team through memorable moments and shared experiences
+                    </p>
+                </div>
+
+                <!-- Team Culture Highlights -->
+                <div class="mt-10">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-6 text-center">
+                        🌟 Our Team Culture Values
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="bg-gradient-to-br from-pink-50 to-rose-50 p-4 rounded-xl border border-pink-200 text-center">
+                            <div class="text-3xl mb-2">🏆</div>
+                            <div class="font-bold text-gray-900">Excellence</div>
+                            <div class="text-sm text-gray-600 mt-1">Winning together</div>
+                        </div>
+                        <div class="bg-gradient-to-br from-green-50 to-emerald-50 p-4 rounded-xl border border-green-200 text-center">
+                            <div class="text-3xl mb-2">🤲</div>
+                            <div class="font-bold text-gray-900">Community</div>
+                            <div class="text-sm text-gray-600 mt-1">Giving back</div>
+                        </div>
+                        <div class="bg-gradient-to-br from-purple-50 to-violet-50 p-4 rounded-xl border border-purple-200 text-center">
+                            <div class="text-3xl mb-2">🎉</div>
+                            <div class="font-bold text-gray-900">Celebration</div>
+                            <div class="text-sm text-gray-600 mt-1">Enjoying success</div>
                         </div>
                     </div>
                 </div>
 
-                <div class="mt-8">
-                    <h3 class="text-lg font-semibold text-[#007FFF]">Switching Branches</h3>
-                    <p class="text-gray-600">Branches are like parallel universes for your code. You can switch between them to work on different features.</p>
-                    <p class="mono mt-2 text-center bg-[#86C4FF] text-[#00449E] p-3 rounded-lg">git checkout [branch-name]</p>
+                <!-- Summary Stats -->
+                <div class="mt-10 bg-gradient-to-r from-pink-50 via-purple-50 to-blue-50 p-6 rounded-2xl border-2 border-pink-200">
+                    <div class="flex flex-wrap justify-around gap-6 text-center">
+                        <div>
+                            <div class="text-4xl font-bold text-pink-700">Multiple</div>
+                            <div class="text-sm text-gray-600 mt-1">Awards Won</div>
+                        </div>
+                        <div>
+                            <div class="text-4xl font-bold text-green-700">Community</div>
+                            <div class="text-sm text-gray-600 mt-1">Focused</div>
+                        </div>
+                        <div>
+                            <div class="text-4xl font-bold text-purple-700">Strong</div>
+                            <div class="text-sm text-gray-600 mt-1">Team Bond</div>
+                        </div>
+                    </div>
                 </div>
+            </section>
+        </div>
 
-                <div class="mt-8 bg-yellow-50 border border-yellow-300 rounded-lg p-4">
-                    <h3 class="text-lg font-semibold text-yellow-800">⚠️ Reverting Local Changes</h3>
-                    <p class="text-sm text-yellow-700">These commands discard local changes that you have <span class="font-bold">not committed</span>. Use them with care, as the changes cannot be recovered.</p>
-                    <p class="mono mt-2">git restore [file]</p>
-                    <p class="mono mt-2">git reset --hard</p>
+        <!-- Footer / Closing Statement -->
+        <footer class="mt-12 pt-8 border-t-2 border-indigo-300">
+            <div class="bg-gradient-to-r from-indigo-100 via-purple-100 to-pink-100 p-8 rounded-2xl text-center relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
+                    <div class="text-9xl">🎯</div>
+                </div>
+                <div class="relative z-10">
+                    <p class="text-2xl font-bold text-gray-900 mb-3">
+                        <span class="inline-block animate-bounce">🚀</span> Let's Drive Impact Together!
+                    </p>
+                    <p class="text-lg text-gray-700 mb-4">
+                        I look forward to partnering with you to deliver the next level of business value
+                    </p>
+                    <div class="flex justify-center gap-4 flex-wrap mt-6">
+                        <span class="skill-badge">🎯 Results-Driven</span>
+                        <span class="skill-badge">🤝 Collaborative</span>
+                        <span class="skill-badge">💡 Innovative</span>
+                        <span class="skill-badge">🌟 Customer-Focused</span>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-indigo-300">
+                        <p class="text-sm text-gray-600 italic">
+                            "Transforming challenges into opportunities, one innovation at a time" ✨
+                        </p>
+                    </div>
                 </div>
             </div>
-
-            <div class="md:col-span-2 bg-white rounded-lg shadow-md p-6">
-                <h2 class="text-2xl font-bold text-[#005CB9] mb-4">✨ Git Command Explainer (Powered by Gemini)</h2>
-                <p class="text-gray-600 mb-6">Curious about a Git command? Type it below, and our Gemini-powered explainer will tell you what it does, perfect for beginners!</p>
-                <div class="flex flex-col gap-4">
-                    <input type="text" id="gitCommandInput" placeholder="e.g., git status or git log" class="p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#007FFF]">
-                    <button id="explainCommandBtn" class="bg-[#007FFF] hover:bg-[#005CB9] text-white font-bold py-3 px-6 rounded-lg transition duration-300 ease-in-out shadow-md hover:shadow-lg">✨ Explain Command</button>
-                </div>
-                <div id="explanationOutput" class="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-lg text-gray-700 min-h-[100px] flex items-center justify-center text-center">
-                    <p class="text-gray-500">Your explanation will appear here.</p>
-                </div>
-            </div>
-
-        </main>
-
-        <footer class="text-center mt-12 py-6 border-t">
-            <p class="text-gray-500">Infographic created with Tailwind CSS and Chart.js. No SVG or Mermaid JS was used in this output.</p>
         </footer>
-
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            
-            const brilliantBlues = {
-                deep: '#00449E',
-                primary: '#005CB9',
-                bright: '#007FFF',
-                light: '#41A0FF',
-                pale: '#86C4FF',
-                text: '#334155'
-            };
+        const pages = ['journey', 'value', 'products', 'leadership', 'innovations', 'appreciations', 'bonding'];
 
-            function wrapLabel(label, maxWidth = 16) {
-                if (label.length <= maxWidth) {
-                    return label;
-                }
-                const words = label.split(' ');
-                let lines = [];
-                let currentLine = '';
-                for (const word of words) {
-                    if ((currentLine + ' ' + word).trim().length > maxWidth) {
-                        lines.push(currentLine.trim());
-                        currentLine = word;
+        /**
+         * Switches the visible page content and updates the navigation buttons.
+         * @param {string} targetPageId - The ID suffix of the page to show (e.g., 'journey', 'value').
+         */
+        function showPage(targetPageId) {
+            pages.forEach(id => {
+                const pageElement = document.getElementById(`page-${id}`);
+                const navButton = document.getElementById(`nav-${id}`);
+
+                if (pageElement && navButton) {
+                    if (id === targetPageId) {
+                        pageElement.classList.remove('hidden');
+                        navButton.classList.add('active');
                     } else {
-                        currentLine = (currentLine + ' ' + word).trim();
+                        pageElement.classList.add('hidden');
+                        navButton.classList.remove('active');
                     }
                 }
-                if (currentLine) {
-                    lines.push(currentLine.trim());
-                }
-                return lines;
+            });
+        }
+        
+        /**
+         * Toggles the visibility of detail blocks within the Career Chapter Map.
+         * @param {string} id - The ID suffix of the detail block (e.g., 'tcs').
+         * @param {HTMLElement} cardElement - The element that was clicked (the phase card).
+         */
+        function toggleDetails(id, cardElement) {
+            const detailsElement = document.getElementById(`details-${id}`);
+            const arrowElement = document.getElementById(`arrow-${id}`);
+
+            if (detailsElement.classList.contains('details-container') && !detailsElement.classList.contains('show')) {
+                // Collapse all others before expanding the target
+                document.querySelectorAll('.details-container.show').forEach(el => {
+                    const otherId = el.id.replace('details-', '');
+                    el.classList.remove('show');
+                    document.getElementById(`arrow-${otherId}`).classList.remove('rotate-180');
+                    document.getElementById(`card-${otherId}`).classList.remove('active');
+                });
+
+                // Show target content
+                detailsElement.classList.add('show');
+                arrowElement.classList.add('rotate-180');
+                cardElement.classList.add('active');
+            } else {
+                // Hide target content
+                detailsElement.classList.remove('show');
+                arrowElement.classList.remove('rotate-180');
+                cardElement.classList.remove('active');
             }
+        }
 
-            const tooltipTitleCallback = {
-                plugins: {
-                    tooltip: {
-                        callbacks: {
-                            title: function(tooltipItems) {
-                                const item = tooltipItems[0];
-                                let label = item.chart.data.labels[item.dataIndex];
-                                if (Array.isArray(label)) {
-                                  return label.join(' ');
-                                } else {
-                                  return label;
-                                }
-                            }
-                        }
-                    }
-                }
-            };
 
-            const usageFrequencyCtx = document.getElementById('usageFrequencyChart').getContext('2d');
-            new Chart(usageFrequencyCtx, {
-                type: 'bar',
-                data: {
-                    labels: [
-                        'git status', 
-                        'git log', 
-                        'git branch', 
-                        'git pull', 
-                        'git checkout [branch]', 
-                        'git diff',
-                        'git fetch'
-                    ].map(label => wrapLabel(label)),
-                    datasets: [{
-                        label: 'Conceptual Usage Frequency',
-                        data: [95, 85, 80, 75, 70, 60, 50],
-                        backgroundColor: [
-                            brilliantBlues.bright,
-                            brilliantBlues.light,
-                            brilliantBlues.pale,
-                            brilliantBlues.bright,
-                            brilliantBlues.light,
-                            brilliantBlues.pale,
-                            brilliantBlues.bright
-                        ],
-                        borderRadius: 4,
-                        borderWidth: 0
-                    }]
-                },
-                options: {
-                    indexAxis: 'y',
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        x: {
-                            beginAtZero: true,
-                            grid: { display: false },
-                            ticks: { display: false }
-                        },
-                        y: {
-                            grid: { display: false },
-                            ticks: { color: brilliantBlues.text, font: { size: 14 } }
-                        }
-                    },
-                    plugins: {
-                        legend: {
-                            display: false
-                        },
-                        ...tooltipTitleCallback.plugins
-                    }
-                }
-            });
-
-            const gitCommandInput = document.getElementById('gitCommandInput');
-            const explainCommandBtn = document.getElementById('explainCommandBtn');
-            const explanationOutput = document.getElementById('explanationOutput');
-
-            explainCommandBtn.addEventListener('click', async () => {
-                const command = gitCommandInput.value.trim();
-                if (!command) {
-                    explanationOutput.innerHTML = '<p class="text-red-500">Please enter a Git command.</p>';
-                    return;
-                }
-
-                explanationOutput.innerHTML = '<p class="text-gray-500 animate-pulse">Loading explanation...</p>';
-
-                let chatHistory = [];
-                const prompt = `Explain the Git command '${command}' for a beginner. Clearly state its purpose and whether it is generally considered a 'safe' (read-only) command or one that can make 'destructive' changes to the repository history or working directory. Keep the explanation concise and easy to understand.`;
-                chatHistory.push({ role: "user", parts: [{ text: prompt }] });
-                const payload = { contents: chatHistory };
-                const apiKey = "";
-                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
-
-                let retryCount = 0;
-                const maxRetries = 5;
-                const baseDelay = 1000;
-
-                const fetchWithRetry = async () => {
-                    try {
-                        const response = await fetch(apiUrl, {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify(payload)
-                        });
-
-                        if (!response.ok) {
-                            if (response.status === 429 && retryCount < maxRetries) {
-                                const delay = baseDelay * Math.pow(2, retryCount);
-                                retryCount++;
-                                await new Promise(resolve => setTimeout(resolve, delay));
-                                return fetchWithRetry();
-                            }
-                            throw new Error(`HTTP error! status: ${response.status}`);
-                        }
-
-                        const result = await response.json();
-                        if (result.candidates && result.candidates.length > 0 &&
-                            result.candidates[0].content && result.candidates[0].content.parts &&
-                            result.candidates[0].content.parts.length > 0) {
-                            const text = result.candidates[0].content.parts[0].text;
-                            explanationOutput.innerHTML = `<p>${text}</p>`;
-                        } else {
-                            explanationOutput.innerHTML = '<p class="text-red-500">Could not get a valid explanation. Please try again.</p>';
-                        }
-                    } catch (error) {
-                        console.error('Error fetching explanation:', error);
-                        explanationOutput.innerHTML = `<p class="text-red-500">An error occurred: ${error.message}. Please try again later.</p>`;
-                    }
-                };
-
-                fetchWithRetry();
-            });
+        // Initialize the view by showing the first page (My Journey) on load
+        document.addEventListener('DOMContentLoaded', () => {
+            showPage('journey');
         });
     </script>
-
 </body>
 </html>
